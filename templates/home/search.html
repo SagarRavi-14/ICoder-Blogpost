@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Search Result {% endblock title %}
+{% block body %}
+{% load static %}
+<div class="container">
+{% if allposts|length > 0 %}<h2>Search Result for {{query}}:</h2>{% endif %}
+
+{% for item in allposts %}
+<div class=" my-3 row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-primary">{{item.author}}</strong>
+        <h3 class="mb-0">{{item.title}}</h3>
+        <div class="mb-1 text-muted">{{item.time_stamp}}</div>
+        <p class="card-text mb-auto">{{item.content|truncatechars:500}}</p>
+        <div class="my-2"><a href="/blog/{{item.slug}}" role="button" class="btn btn-primary">Continue reading</a></div>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+             <img src='/{{item.image}}'  width="500" height="350" preserveAspectRatio="xMidYMid slice" >
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}
